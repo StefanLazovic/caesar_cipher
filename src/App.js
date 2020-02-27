@@ -1,15 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TextToCipher from './components/TextToCipher';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Caesar Cipher (Coming Soon)
-        </p>
+        <TextToCipher />
       </header>
     </div>
   );
