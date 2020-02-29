@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShuffleText from 'react-shuffle-text';
 
 class TextToCipher extends Component {
   state = {
@@ -16,7 +17,8 @@ class TextToCipher extends Component {
   }
 
 
-
+  // alphabet: ['a', 'b', 'c', ...
+  // shiftedA: ['d', 'e', 'f', ...
   pivotArray = () => {
     const { alphabet } = this.state;
     const slice1 = alphabet.slice(0, 3);
@@ -29,8 +31,8 @@ class TextToCipher extends Component {
 
 
 
-  tryCipher = (e) => {
-    const { alphabet, shiftedAlphabet, encodedText } = this.state;
+  tryCipher = e => {
+    const { alphabet, shiftedAlphabet } = this.state;
     let cipher = '';
     for (const letter of e.target.value) {
       if (alphabet.indexOf(letter) === -1) {
@@ -51,7 +53,7 @@ class TextToCipher extends Component {
   }
 
 
-  decodeCipher = (e) => {
+  decodeCipher = e => {
     const { alphabet, shiftedAlphabet } = this.state;
     let text = '';
     for (const letter of e.target.value) {
@@ -74,16 +76,17 @@ class TextToCipher extends Component {
 
 
 
+
+
+
   render() {console.log(this.state);
     const { encodedText, decodedText } = this.state;
     return (
       <div>
+        <h1><ShuffleText content="CAESAR CIPHER" /></h1>
         <form>
-          <label htmlFor="text">Plain Text</label><br/>
-          <input type="text" id="text" name="text" onChange={this.tryCipher} value={decodedText} /><br/>
-
-          <label htmlFor="encodedText">Ciphered Text</label><br/>
-          <input type="text" id="encodedText" name="encodedText" onChange={this.decodeCipher} value={encodedText} />
+          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text"  className="animated zoomIn slower" /><br/>
+          <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Ciphered Text"  className="animated zoomIn slower" />
         </form>
       </div>
     );
