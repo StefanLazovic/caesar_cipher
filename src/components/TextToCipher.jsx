@@ -30,42 +30,60 @@ class TextToCipher extends Component {
 
 
   tryCipher = (e) => {
-    const { alphabet, shiftedAlphabet } = this.state;
+    const { alphabet, shiftedAlphabet, encodedText } = this.state;
     let cipher = '';
     for (const letter of e.target.value) {
-      cipher += shiftedAlphabet[alphabet.indexOf(letter)];
+      if (alphabet.indexOf(letter) === -1) {
+        if (new RegExp("[A-Z]").test(letter)) {
+          cipher += shiftedAlphabet[alphabet.indexOf(letter.toLowerCase())].toUpperCase();
+        } else {
+          cipher += letter;
+        }
+      } else {
+        cipher += shiftedAlphabet[alphabet.indexOf(letter)];
+      }
     }
     this.setState({
       ...this.state,
-      encodedText: cipher
+      encodedText: cipher,
+      decodedText: e.target.value
     });
   }
-
 
 
   decodeCipher = (e) => {
     const { alphabet, shiftedAlphabet } = this.state;
     let text = '';
     for (const letter of e.target.value) {
-      text += alphabet[shiftedAlphabet.indexOf(letter)];
+      if (shiftedAlphabet.indexOf(letter) === -1) {
+        if (new RegExp("[A-Z]").test(letter)) {
+          text += alphabet[shiftedAlphabet.indexOf(letter.toLowerCase())].toUpperCase();
+        } else {
+          text += letter;
+        }
+      } else {
+        text += alphabet[shiftedAlphabet.indexOf(letter)];
+      }
     }
     this.setState({
       ...this.state,
-      decodedText: text
+      decodedText: text,
+      encodedText: e.target.value
     });
   }
 
 
 
   render() {console.log(this.state);
+    const { encodedText, decodedText } = this.state;
     return (
       <div>
         <form>
           <label htmlFor="text">Plain Text</label><br/>
-          <input type="text" id="text" name="text" onChange={this.tryCipher} /><br/>
+          <input type="text" id="text" name="text" onChange={this.tryCipher} value={decodedText} /><br/>
 
           <label htmlFor="encodedText">Ciphered Text</label><br/>
-          <input type="text" id="encodedText" name="encodedText" onChange={this.decodeCipher} />
+          <input type="text" id="encodedText" name="encodedText" onChange={this.decodeCipher} value={encodedText} />
         </form>
       </div>
     );
