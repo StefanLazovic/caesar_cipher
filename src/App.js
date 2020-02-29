@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
-import TextToCipher from './components/TextToCipher';
+import TextToCipher from './components/TextToCipher/TextToCipher';
+import DocumentPreview from './components/DocumentPreview/DocumentPreview';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <TextToCipher />
-      </header>
+      <div className="dark-overlay">
+        <div className="center-components">
+          <TextToCipher />
+          <DocumentPreview />
+        </div>
+      </div>
     </div>
   );
 }

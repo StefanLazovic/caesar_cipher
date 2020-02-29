@@ -5,30 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  overflow: hidden;
+
+  background-image: url('./assets/caesar.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-
-input[type='text'] { font-size: 48px; font-family: 'Cinzel'; }
-
-
-/* write styles for .shuffle-text-char with higher specificity */
-h1 {
-  animation: 2s ease-in-out both myWordEnter; /* none for no effect */
-}
-
-@keyframes myWordEnter {
-  0% {
-    opacity: 0;
-    transform: translate(0, -100%) scale(5);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
 }

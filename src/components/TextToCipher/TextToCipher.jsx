@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './textToCipher.css';
 import ShuffleText from 'react-shuffle-text';
+
 
 class TextToCipher extends Component {
   state = {
@@ -82,10 +84,10 @@ class TextToCipher extends Component {
   render() {console.log(this.state);
     const { encodedText, decodedText } = this.state;
     return (
-      <div>
+      <div className="input-position">
         <h1><ShuffleText content="CAESAR CIPHER" /></h1>
         <form>
-          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text"  className="animated zoomIn slower" /><br/>
+          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text"  className="animated zoomIn slower" />
           <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Ciphered Text"  className="animated zoomIn slower" />
         </form>
       </div>

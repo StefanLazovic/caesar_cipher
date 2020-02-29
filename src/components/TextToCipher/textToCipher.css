@@ -1,0 +1,29 @@
+.input-position {
+  
+}
+
+
+input[type='text'] {
+  display: block;
+  font-size: calc(25px + 2vmin);
+  font-family: 'Cinzel';
+  margin-bottom: 10px;
+}
+
+
+
+h1 {
+  animation: 2s ease-in-out both myWordEnter;
+}
+
+@keyframes myWordEnter {
+  0% {
+    opacity: 0;
+    transform: translate(0, -100%) scale(5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
