@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './textToCipher.css';
 import ShuffleText from 'react-shuffle-text';
+import DocumentPreview from '../DocumentPreview/DocumentPreview';
+
 
 
 class TextToCipher extends Component {
@@ -9,7 +11,9 @@ class TextToCipher extends Component {
     alphabet: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
     shiftedAlphabet: [],
     encodedText: '',
-    decodedText: ''
+    decodedText: '',
+    zoomIn: 'animated zoomIn slower',
+    fadeOutDownBig: ''
   }
 
 
@@ -55,6 +59,7 @@ class TextToCipher extends Component {
   }
 
 
+
   decodeCipher = e => {
     const { alphabet, shiftedAlphabet } = this.state;
     let text = '';
@@ -78,18 +83,32 @@ class TextToCipher extends Component {
 
 
 
+  hideInputs = () => {
+    this.setState({
+      ...this.state,
+      zoomIn: '',
+      fadeOutDownBig: 'animated fadeOutDownBig slow'
+    });
+  }
 
 
 
-  render() {console.log(this.state);
-    const { encodedText, decodedText } = this.state;
+  render() {
+    const { encodedText, decodedText, zoomIn, fadeOutDownBig } = this.state;
     return (
       <div className="input-position">
-        <h1><ShuffleText content="CAESAR CIPHER" /></h1>
-        <form>
-          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text"  className="animated zoomIn slower" />
-          <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Ciphered Text"  className="animated zoomIn slower" />
+        <h1 className={`${fadeOutDownBig}`}>
+          <ShuffleText content="CAESAR CIPHER" />
+        </h1>
+        <form className={`${zoomIn} ${fadeOutDownBig}`}>
+          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text" />
+          <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Ciphered Text" />
         </form>
+        <DocumentPreview
+          hideInputs={this.hideInputs}
+          encodedText={encodedText}
+          decodedText={decodedText}
+        />
       </div>
     );
   }
