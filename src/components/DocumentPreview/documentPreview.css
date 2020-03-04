@@ -36,6 +36,14 @@ p {
   top: 170px;
 }
 
+#hideEncoded {
+  display: none;
+}
+
+#hideDecoded {
+  display: none;
+}
+
 .modal {
   position:fixed;
   left:0;

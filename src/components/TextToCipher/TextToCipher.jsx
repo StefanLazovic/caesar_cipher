@@ -13,7 +13,8 @@ class TextToCipher extends Component {
     encodedText: '',
     decodedText: '',
     zoomIn: 'animated zoomIn slower',
-    fadeOutDownBig: ''
+    fadeOutDownBig: '',
+    fadeInUpBig: ''
   }
 
 
@@ -56,6 +57,7 @@ class TextToCipher extends Component {
       encodedText: cipher,
       decodedText: e.target.value
     });
+    this.refs.child.setZoomIn();
   }
 
 
@@ -79,6 +81,7 @@ class TextToCipher extends Component {
       decodedText: text,
       encodedText: e.target.value
     });
+    this.refs.child.setZoomIn();
   }
 
 
@@ -87,27 +90,49 @@ class TextToCipher extends Component {
     this.setState({
       ...this.state,
       zoomIn: '',
+      fadeInUpBig: '',
       fadeOutDownBig: 'animated fadeOutDownBig slow'
     });
   }
 
 
+  showInputs = () => {
+    this.setState({
+      ...this.state,
+      fadeOutDownBig: '',
+      fadeInUpBig: 'animated fadeInUpBig'
+    });
+  }
+
+
+  deleteAll = () => {
+    setTimeout(() => this.setState({
+      ...this.state,
+      encodedText: '',
+      decodedText: '',
+    }), 3000);
+  }
+
+
 
   render() {
-    const { encodedText, decodedText, zoomIn, fadeOutDownBig } = this.state;
+    const { encodedText, decodedText, zoomIn, fadeOutDownBig, fadeInUpBig } = this.state;
     return (
       <div className="input-position">
-        <h1 className={`${fadeOutDownBig}`}>
+        <h1 className={`${fadeOutDownBig} ${fadeInUpBig}`}>
           <ShuffleText content="CAESAR CIPHER" />
         </h1>
-        <form className={`${zoomIn} ${fadeOutDownBig}`}>
+        <form className={`${zoomIn} ${fadeOutDownBig} ${fadeInUpBig} slow`}>
           <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text" />
           <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Ciphered Text" />
         </form>
         <DocumentPreview
           hideInputs={this.hideInputs}
+          showInputs={this.showInputs}
           encodedText={encodedText}
           decodedText={decodedText}
+          deleteAll={this.deleteAll}
+          ref="child"
         />
       </div>
     );

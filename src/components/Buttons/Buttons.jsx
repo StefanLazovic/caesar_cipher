@@ -3,24 +3,40 @@ import './buttons.css';
 
 class Buttons extends Component {
   state = {
-    buttonName: 'Cipher'
+    buttonName: 'Text'
   }
 
 
 
   changeButtonName = () => {
+    const { toggle } = this.props;
     const { buttonName } = this.state;
-    if (buttonName === 'Cipher') {
-      this.setState({
-        ...this.state,
-        buttonName: 'Text'
-      });
-    } else if (buttonName === 'Text') {
+    toggle();
+    if (buttonName === 'Text') {
       this.setState({
         ...this.state,
         buttonName: 'Cipher'
       });
+    } else if (buttonName === 'Cipher') {
+      this.setState({
+        ...this.state,
+        buttonName: 'Text'
+      });
     }
+  }
+
+
+
+  close = () => {
+    const { closeModal } = this.props;
+    closeModal();
+  }
+
+
+  delete = () => {
+    const { deleteAll, closeModal } = this.props;
+    closeModal();
+    deleteAll();
   }
 
 
@@ -30,8 +46,8 @@ class Buttons extends Component {
     return (
       <div>
         <button onClick={this.changeButtonName} id="text_cipher" className="buttons">{buttonName}</button>
-        <button id="close" className="buttons">Close</button>
-        <button id="delete" className="buttons">Delete</button>
+        <button onClick={this.close} id="close" className="buttons">Close</button>
+        <button onClick={this.delete} id="delete" className="buttons">Delete</button>
       </div>
     );
   }
