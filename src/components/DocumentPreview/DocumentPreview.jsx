@@ -71,7 +71,7 @@ class DocumentPreview extends Component {
       show: false,
       fadeOutUpBig: '',
       fadeInUpBig: '',
-    }), 3500);
+    }), 3000);
   }
 
   setZoomIn = () => {

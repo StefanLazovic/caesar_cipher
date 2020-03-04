@@ -46,7 +46,7 @@ class Buttons extends Component {
     return (
       <div>
         <button onClick={this.changeButtonName} id="text_cipher" className="buttons">{buttonName}</button>
-        <button onClick={this.close} id="close" className="buttons">Close</button>
+        <button onClick={this.close} id="close" className="buttons">Change</button>
         <button onClick={this.delete} id="delete" className="buttons">Delete</button>
       </div>
     );

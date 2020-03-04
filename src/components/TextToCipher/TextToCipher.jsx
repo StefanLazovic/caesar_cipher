@@ -123,8 +123,8 @@ class TextToCipher extends Component {
           <ShuffleText content="CAESAR CIPHER" />
         </h1>
         <form className={`${zoomIn} ${fadeOutDownBig} ${fadeInUpBig} slow`}>
-          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Plain Text" />
-          <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Ciphered Text" />
+          <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Text" maxLength="200" />
+          <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Cipher" maxLength="200" />
         </form>
         <DocumentPreview
           hideInputs={this.hideInputs}

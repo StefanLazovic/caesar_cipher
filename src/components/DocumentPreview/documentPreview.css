@@ -34,6 +34,7 @@ p {
   left: 0;
   right: 17px;
   top: 170px;
+  word-wrap: break-word;
 }
 
 #hideEncoded {
@@ -61,4 +62,40 @@ p {
 
 .hidden {
   visibility: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+  .preview {
+    margin-top: 30px;
+  }
+}
+
+
+@media only screen and (max-width: 400px) {
+  p {
+    font-size: calc(5px + 2vmin);
+    top: 60px;
+    margin-top: 60px;
+    width: 50%;
+  }
+
+  img {
+    width: 70%;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 800px) and (min-width: 400px) {
+  p {
+    font-size: calc(10px + 2vmin);
+    top: 70px;
+    margin-top: 60px;
+    width: 50%;
+  }
+
+  img {
+    width: 70%;
+  }
 }

@@ -1,5 +1,5 @@
 .input-position {
-  
+
 }
 
 
@@ -8,6 +8,7 @@ input[type='text'] {
   font-size: calc(25px + 2vmin);
   font-family: 'Cinzel';
   margin-bottom: 10px;
+  text-indent: 10px;
 }
 
 
@@ -25,5 +26,12 @@ h1 {
   100% {
     opacity: 1;
     transform: translate(0, 0) scale(1);
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  input[type='text'] {
+    font-size: calc(15px + 2vmin);
   }
 }
