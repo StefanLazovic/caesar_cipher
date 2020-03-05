@@ -15,17 +15,19 @@ class DocumentPreview extends Component {
     fadeInUpBig: '',
     showEncoded: '',
     showDecoded: 'hideDecoded',
+    disabled: false
   }
 
 
-
+  // have to hide the Document Preview button for some time,
+  // because of unexpected animation during page loading
   componentDidMount() {
 		setTimeout(() => this.setState({ ...this.state, hidden: '' }), 1000);
 	}
 
 
 
-  trigger = () => {
+  showDocument = () => {
     this.setState({
       ...this.state,
       show: true,
@@ -35,12 +37,14 @@ class DocumentPreview extends Component {
       fadeOutDownBig: 'animated fadeOutDownBig',
       fadeInDownBig: 'animated fadeInDownBig slow'
     });
+    // trigger hideInputs() method from the TextToCipher parent component (animation purpose)
     this.props.hideInputs();
   }
 
 
+  // fired from Buttons child component, toggles between text and cipher
   toggle = () => {
-    const { showEncoded, showDecoded } = this.state;
+    const { showEncoded } = this.state;
     if (showEncoded === '') {
       this.setState({
         ...this.state,
@@ -57,23 +61,31 @@ class DocumentPreview extends Component {
   }
 
 
+  // fired from Buttons child component
   closeModal = () => {
+    // trigger showInputs() method from the TextToCipher parent component (animation purpose)
     this.props.showInputs();
     this.setState({
       ...this.state,
       fadeOutDownBig: '',
       fadeInDownBig: '',
       fadeOutUpBig: 'animated fadeOutUpBig',
-      fadeInUpBig: 'animated fadeInUpBig slower'
+      fadeInUpBig: 'animated fadeInUpBig slower',
+      disabled: true
     });
+    // application needs to wait animation is finished,
+    // in order to prepare state management for the next circle
     setTimeout(() => this.setState({
       ...this.state,
       show: false,
       fadeOutUpBig: '',
       fadeInUpBig: '',
+      disabled: false
     }), 3000);
   }
 
+
+  // fired from TextToCipher parent component (animation purpose)
   setZoomIn = () => {
     const { encodedText, decodedText } = this.props;
     if (encodedText.length === 0 || decodedText.length === 0) {
@@ -84,14 +96,28 @@ class DocumentPreview extends Component {
     }
   }
 
+
+
   render() {
     const { encodedText, decodedText, deleteAll } = this.props;
-    const { hidden, show, zoomIn, fadeOutDownBig, fadeInDownBig, fadeOutUpBig, fadeInUpBig, showEncoded, showDecoded } = this.state;
+    const {
+      hidden,
+      show,
+      zoomIn,
+      fadeOutDownBig,
+      fadeInDownBig,
+      fadeOutUpBig,
+      fadeInUpBig,
+      showEncoded,
+      showDecoded,
+      disabled
+    } = this.state;
+
     return (
       <div>
         {
-          this.state.show === true
-          ? <div className={`modal ${fadeInDownBig} ${fadeOutUpBig}`}>
+          show === true
+          ? <div className={`modal ${fadeInDownBig} ${fadeOutUpBig} min-width`}>
               <img src={require('../../assets/paper.png')} alt="Caesar" />
               <p id={`${showEncoded}`}>{encodedText}</p>
               <p id={`${showDecoded}`}>{decodedText}</p>
@@ -101,7 +127,12 @@ class DocumentPreview extends Component {
         }
         {
           encodedText.length !== 0 || decodedText.length !== 0
-          ? <button onClick={this.trigger} className={`preview ${zoomIn} ${fadeOutDownBig} ${fadeInUpBig}`}>Document Preview</button>
+          ? <button
+              onClick={this.showDocument}
+              className={`preview ${zoomIn} ${fadeOutDownBig} ${fadeInUpBig}`}
+              disabled={disabled}>
+              Document Preview
+            </button>
           : <button className={`preview animated zoomOut ${hidden}`} disabled>Document Preview</button>
         }
       </div>

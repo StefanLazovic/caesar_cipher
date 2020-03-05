@@ -7,7 +7,6 @@ import DocumentPreview from '../DocumentPreview/DocumentPreview';
 
 class TextToCipher extends Component {
   state = {
-    //////////  0    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25
     alphabet: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
     shiftedAlphabet: [],
     encodedText: '',
@@ -18,10 +17,11 @@ class TextToCipher extends Component {
   }
 
 
-
+  // fire pivotArray() method when component mounts
   componentDidMount() {
     this.pivotArray();
   }
+
 
 
   // alphabet: ['a', 'b', 'c', ...
@@ -37,18 +37,22 @@ class TextToCipher extends Component {
   }
 
 
-
+  // convert text to cipher
   tryCipher = e => {
+    e.preventDefault();
     const { alphabet, shiftedAlphabet } = this.state;
     let cipher = '';
     for (const letter of e.target.value) {
+      // if a letter doesn't exist in the alphabet array (punctuation marks), add it anyway (else)
       if (alphabet.indexOf(letter) === -1) {
+        // if this letter is uppercase, then lowercase it, cipher it, uppercase it and put it into cipher variable
         if (new RegExp("[A-Z]").test(letter)) {
           cipher += shiftedAlphabet[alphabet.indexOf(letter.toLowerCase())].toUpperCase();
         } else {
           cipher += letter;
         }
       } else {
+        // add the ciphered letter which does exist in the alphabet array
         cipher += shiftedAlphabet[alphabet.indexOf(letter)];
       }
     }
@@ -57,12 +61,14 @@ class TextToCipher extends Component {
       encodedText: cipher,
       decodedText: e.target.value
     });
+    // trigger setZoomIn() method from the DocumentPreview child component (animation purpose)
     this.refs.child.setZoomIn();
   }
 
 
-
+  // convert cipher to text (a similar logic like from above)
   decodeCipher = e => {
+    e.preventDefault();
     const { alphabet, shiftedAlphabet } = this.state;
     let text = '';
     for (const letter of e.target.value) {
@@ -85,7 +91,7 @@ class TextToCipher extends Component {
   }
 
 
-
+  // triggered from the DocumentPreview child component (animation purpose)
   hideInputs = () => {
     this.setState({
       ...this.state,
@@ -96,6 +102,7 @@ class TextToCipher extends Component {
   }
 
 
+  // triggered from the DocumentPreview child component (animation purpose)
   showInputs = () => {
     this.setState({
       ...this.state,
@@ -105,6 +112,7 @@ class TextToCipher extends Component {
   }
 
 
+  // drilled method through DocumentPreview component and fired from Buttons component
   deleteAll = () => {
     setTimeout(() => this.setState({
       ...this.state,
@@ -118,14 +126,17 @@ class TextToCipher extends Component {
   render() {
     const { encodedText, decodedText, zoomIn, fadeOutDownBig, fadeInUpBig } = this.state;
     return (
-      <div className="input-position">
+      <div>
         <h1 className={`${fadeOutDownBig} ${fadeInUpBig}`}>
+          {/*ShuffleText title animation*/}
           <ShuffleText content="CAESAR CIPHER" />
         </h1>
+
         <form className={`${zoomIn} ${fadeOutDownBig} ${fadeInUpBig} slow`}>
           <input type="text" onChange={this.tryCipher} value={decodedText} placeholder="Text" maxLength="200" />
           <input type="text" onChange={this.decodeCipher} value={encodedText} placeholder="Cipher" maxLength="200" />
         </form>
+
         <DocumentPreview
           hideInputs={this.hideInputs}
           showInputs={this.showInputs}

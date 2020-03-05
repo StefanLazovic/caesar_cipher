@@ -10,12 +10,12 @@
   cursor: pointer;
   margin-top: 50px;
   margin-bottom: 50px;
-  font-family: 'Cinzel';
   font-size: calc(5px + 2vmin);
   z-index: 1;
   border-radius: 50px 50px;
   outline: 0;
 }
+
 
 #text_cipher {
   background-color: #a919ef;
@@ -32,6 +32,7 @@
 #delete {
   background-color: #fd2016;
 }
+
 
 @media only screen and (max-width: 450px) {
   .buttons {

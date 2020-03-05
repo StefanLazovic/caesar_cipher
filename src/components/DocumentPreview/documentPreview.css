@@ -10,7 +10,6 @@
   margin: 4px 2px;
   cursor: pointer;
   margin-top: 50px;
-  font-family: 'Cinzel';
   font-size: calc(5px + 2vmin);
   z-index: 1;
   border-radius: 50px 50px;
@@ -19,12 +18,13 @@
 
 
 img {
-  width: 800px;
+  width: 600px;
   margin-top: 100px;
 }
 
+
 p {
-  width: 550px;
+  width: 500px;
   text-align: justify;
   color: black;
   font-size: 35px;
@@ -37,13 +37,16 @@ p {
   word-wrap: break-word;
 }
 
+
 #hideEncoded {
   display: none;
 }
 
+
 #hideDecoded {
   display: none;
 }
+
 
 .modal {
   position:fixed;
@@ -60,9 +63,11 @@ p {
   cursor: default;
 }
 
+
 .hidden {
   visibility: hidden;
 }
+
 
 @media only screen and (max-width: 768px) {
   .preview {
@@ -85,8 +90,6 @@ p {
 }
 
 
-
-
 @media only screen and (max-width: 800px) and (min-width: 400px) {
   p {
     font-size: calc(10px + 2vmin);
@@ -97,5 +100,12 @@ p {
 
   img {
     width: 70%;
+  }
+}
+
+
+@media only screen and (max-width: 220px) {
+  .min-width {
+    min-width: 220px;
   }
 }

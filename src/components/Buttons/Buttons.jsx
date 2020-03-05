@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import './buttons.css';
 
+
+
 class Buttons extends Component {
   state = {
     buttonName: 'Text'
   }
 
 
-
+  // not by code directly, but related to toggle() method from DocumentPreview parent component
+  // button name is changing with toggle() text changing accordingly
   changeButtonName = () => {
     const { toggle } = this.props;
     const { buttonName } = this.state;
@@ -26,13 +29,15 @@ class Buttons extends Component {
   }
 
 
-
+  // trigger closeModal() method from the DocumentPreview parent component
+  // in closeModal(), showInputs() metod is fired from the TextToCipher parent
   close = () => {
     const { closeModal } = this.props;
     closeModal();
   }
 
 
+  // deleteAll() method drilled from TextToCipher component
   delete = () => {
     const { deleteAll, closeModal } = this.props;
     closeModal();
@@ -51,7 +56,6 @@ class Buttons extends Component {
       </div>
     );
   }
-
 }
 
 export default Buttons;

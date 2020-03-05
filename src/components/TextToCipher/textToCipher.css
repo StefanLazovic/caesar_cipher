@@ -1,21 +1,15 @@
-.input-position {
-
-}
-
-
 input[type='text'] {
   display: block;
   font-size: calc(25px + 2vmin);
-  font-family: 'Cinzel';
   margin-bottom: 10px;
   text-indent: 10px;
 }
 
 
-
 h1 {
   animation: 2s ease-in-out both myWordEnter;
 }
+
 
 @keyframes myWordEnter {
   0% {
