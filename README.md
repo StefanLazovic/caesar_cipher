@@ -1,3 +1,12 @@
+## ATTENTION
+If you want to clone this project to your device, please follow the instructions below:
+1. run on terminal: git clone https://github.com/StefanLazovic/caesar_cipher.git
+2. run on terminal: cd caesar_cipher
+3. run on terminal: npm i
+4. run on terminal: npm start
+
+Firebase Link: https://caesarcipher-000.web.app/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
